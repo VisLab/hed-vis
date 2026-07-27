@@ -92,7 +92,7 @@ visualizer = HedTagVisualizer()
 results = visualizer.visualize_from_counts(tag_counts)
 
 # Save word cloud
-results['word_cloud']['wordcloud_object'].to_file('output.png')
+results["word_cloud"]["wordcloud_object"].to_file("output.png")
 ```
 
 ## Getting started with hedvis
@@ -240,13 +240,7 @@ The easiest way to create a {index}`word cloud` is from a {index}`dictionary` of
 from hedvis import create_wordcloud
 
 # Define word frequencies
-word_freq = {
-    "Event": 15,
-    "Action": 10,
-    "Sensory-event": 8,
-    "Visual-presentation": 7,
-    "Agent-action": 5
-}
+word_freq = {"Event": 15, "Action": 10, "Sensory-event": 8, "Visual-presentation": 7, "Agent-action": 5}
 
 # Create word cloud
 wc = create_wordcloud(word_freq, width=800, height=600)
@@ -282,11 +276,7 @@ Create {index}`shaped word clouds <word cloud; shaped>` using a {index}`mask ima
 
 ```python
 # Use a PNG image as mask (white areas = text, black = empty)
-wc = create_wordcloud(
-    word_freq,
-    mask_path="brain_mask.png",
-    background_color="white"
-)
+wc = create_wordcloud(word_freq, mask_path="brain_mask.png", background_color="white")
 wc.to_file("shaped_wordcloud.png")
 ```
 
@@ -310,7 +300,7 @@ wc = create_wordcloud(
     prefer_horizontal=0.9,  # 90% horizontal text
     min_font_size=10,
     max_font_size=100,
-    colormap="viridis"
+    colormap="viridis",
 )
 ```
 
@@ -340,14 +330,9 @@ from hedvis import HedTagVisualizer
 
 # Define configuration as dictionary
 config = {
-    "word_cloud": {
-        "width": 1000,
-        "height": 700,
-        "background_color": "white",
-        "colormap": "plasma"
-    },
+    "word_cloud": {"width": 1000, "height": 700, "background_color": "white", "colormap": "plasma"},
     "output_formats": ["png", "svg"],
-    "save_directory": "./visualizations"
+    "save_directory": "./visualizations",
 }
 
 # Create visualizer
@@ -369,15 +354,12 @@ wc_config = WordCloudConfig(
     colormap="viridis",
     prefer_horizontal=0.8,
     min_font_size=12,
-    max_font_size=120
+    max_font_size=120,
 )
 
 # Configure visualizer
 viz_config = VisualizationConfig(
-    word_cloud=wc_config,
-    output_formats=["png", "svg"],
-    save_directory="./output",
-    save_files=True
+    word_cloud=wc_config, output_formats=["png", "svg"], save_directory="./output", save_files=True
 )
 
 # Create visualizer
@@ -394,7 +376,7 @@ wc_config = WordCloudConfig(
     mask_path="brain_outline.png",
     background_color="white",
     contour_width=3,
-    contour_color="navy"
+    contour_color="navy",
 )
 
 viz_config = VisualizationConfig(word_cloud=wc_config)
@@ -424,7 +406,7 @@ visualizer = HedTagVisualizer()
 results = visualizer.visualize_from_counts(tag_counts)
 
 # Access the word cloud
-wc = results['word_cloud']['wordcloud_object']
+wc = results["word_cloud"]["wordcloud_object"]
 wc.to_file("hed_tags.png")
 ```
 
@@ -459,15 +441,11 @@ visualizer = HedTagVisualizer()
 
 # Generate visualizations
 results = visualizer.visualize_from_tabular(
-    tabular,
-    schema,
-    output_basename="experiment_tags",
-    include_context=True,
-    replace_defs=True
+    tabular, schema, output_basename="experiment_tags", include_context=True, replace_defs=True
 )
 
 # Save outputs
-wc = results['word_cloud']['wordcloud_object']
+wc = results["word_cloud"]["wordcloud_object"]
 wc.to_file("experiment_wordcloud.png")
 ```
 
@@ -493,19 +471,11 @@ df = pd.read_csv("events.tsv", sep="\t")
 schema = load_schema()
 
 # Create visualizer with config
-config = {
-    "word_cloud": {"width": 1000, "height": 600},
-    "output_formats": ["svg"],
-    "save_directory": "./output"
-}
+config = {"word_cloud": {"width": 1000, "height": 600}, "output_formats": ["svg"], "save_directory": "./output"}
 visualizer = HedTagVisualizer(config)
 
 # Generate visualizations
-results = visualizer.visualize_from_dataframe(
-    df,
-    schema,
-    name="my_dataset"
-)
+results = visualizer.visualize_from_dataframe(df, schema, name="my_dataset")
 ```
 
 ### Using tag templates
@@ -517,14 +487,10 @@ Organize tags by category using templates:
 tag_template = {
     "sensory": ["Sensory-event", "Visual-presentation", "Auditory-presentation"],
     "actions": ["Agent-action", "Action"],
-    "timing": ["Onset", "Offset", "Duration"]
+    "timing": ["Onset", "Offset", "Duration"],
 }
 
-results = visualizer.visualize_from_counts(
-    tag_counts,
-    tag_template=tag_template,
-    output_basename="categorized_tags"
-)
+results = visualizer.visualize_from_counts(tag_counts, tag_template=tag_template, output_basename="categorized_tags")
 ```
 
 ```{index} customization
@@ -548,15 +514,12 @@ from hedvis import WordCloudConfig
 
 # Use built-in matplotlib colormaps
 config = WordCloudConfig(
-    colormap="plasma",      # Options: viridis, plasma, inferno, magma, etc.
-    color_range=(0.2, 0.8)  # Use middle 60% of colormap
+    colormap="plasma",  # Options: viridis, plasma, inferno, magma, etc.
+    color_range=(0.2, 0.8),  # Use middle 60% of colormap
 )
 
 # Or use color names
-config = WordCloudConfig(
-    background_color="navy",
-    contour_color="gold"
-)
+config = WordCloudConfig(background_color="navy", contour_color="gold")
 ```
 
 ```{index} font_path
@@ -575,7 +538,7 @@ config = WordCloudConfig(
     font_path="/path/to/custom-font.ttf",
     min_font_size=10,
     max_font_size=150,
-    prefer_horizontal=0.95  # Nearly all horizontal text
+    prefer_horizontal=0.95,  # Nearly all horizontal text
 )
 ```
 
@@ -583,9 +546,9 @@ config = WordCloudConfig(
 
 ```python
 config = WordCloudConfig(
-    relative_scaling=0.8,        # Word size scaling factor
-    scale_adjustment=1.5,        # Frequency scaling
-    prefer_horizontal=0.75       # 75% horizontal orientation
+    relative_scaling=0.8,  # Word size scaling factor
+    scale_adjustment=1.5,  # Frequency scaling
+    prefer_horizontal=0.75,  # 75% horizontal orientation
 )
 ```
 
@@ -594,18 +557,11 @@ config = WordCloudConfig(
 ```python
 visualizer = HedTagVisualizer()
 
-datasets = [
-    ("baseline", baseline_counts),
-    ("task", task_counts),
-    ("rest", rest_counts)
-]
+datasets = [("baseline", baseline_counts), ("task", task_counts), ("rest", rest_counts)]
 
 for name, counts in datasets:
-    results = visualizer.visualize_from_counts(
-        counts,
-        output_basename=f"{name}_tags"
-    )
-    results['word_cloud']['wordcloud_object'].to_file(f"{name}_cloud.png")
+    results = visualizer.visualize_from_counts(counts, output_basename=f"{name}_tags")
+    results["word_cloud"]["wordcloud_object"].to_file(f"{name}_cloud.png")
 ```
 
 ## Output formats
@@ -638,11 +594,7 @@ with open("output.svg", "w") as f:
 Let the visualizer handle file saving:
 
 ```python
-config = VisualizationConfig(
-    output_formats=["png", "svg"],
-    save_directory="./results",
-    save_files=True
-)
+config = VisualizationConfig(output_formats=["png", "svg"], save_directory="./results", save_files=True)
 
 visualizer = HedTagVisualizer(config)
 results = visualizer.visualize_from_counts(tag_counts)
@@ -803,13 +755,10 @@ wc_config = WordCloudConfig(
     colormap="viridis",
     prefer_horizontal=0.85,
     min_font_size=12,
-    max_font_size=100
+    max_font_size=100,
 )
 
-viz_config = VisualizationConfig(
-    word_cloud=wc_config,
-    output_formats=["png", "svg"]
-)
+viz_config = VisualizationConfig(word_cloud=wc_config, output_formats=["png", "svg"])
 
 visualizer = HedTagVisualizer(viz_config)
 results = visualizer.visualize_from_counts(tag_counts)
@@ -824,7 +773,7 @@ config = WordCloudConfig(
     background_color="white",
     contour_width=4,
     contour_color="darkblue",
-    colormap="cool"
+    colormap="cool",
 )
 
 visualizer = HedTagVisualizer(VisualizationConfig(word_cloud=config))
@@ -834,12 +783,7 @@ results = visualizer.visualize_from_counts(tag_counts)
 ### Example 3: Dark theme word cloud
 
 ```python
-config = WordCloudConfig(
-    background_color="black",
-    colormap="plasma",
-    color_range=(0.3, 0.9),
-    prefer_horizontal=0.7
-)
+config = WordCloudConfig(background_color="black", colormap="plasma", color_range=(0.3, 0.9), prefer_horizontal=0.7)
 
 visualizer = HedTagVisualizer(VisualizationConfig(word_cloud=config))
 results = visualizer.visualize_from_counts(tag_counts)
