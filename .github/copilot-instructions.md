@@ -100,6 +100,45 @@ This ensures code changes are immediately reflected without reinstalling.
 - HED integration: hedtools (provides all HED core functionality)
 - Full dependency list in `pyproject.toml` under `[project.dependencies]`
 
+## Line endings configuration
+
+This repository is configured to use Unix-style line endings (`\n`, LF) across all platforms.
+
+### Git configuration
+
+- **`.gitattributes`**: Explicitly sets `* text=auto eol=lf` to normalize all text files to LF line endings on commit
+- **Global Git config**: `core.autocrlf=false` and `core.eol=lf` (prevents automatic CRLF conversion on Windows)
+
+### VS Code settings
+
+The `.vscode/settings.json` is configured with:
+
+```json
+{
+    "files.eol": "\n",
+    "files.insertFinalNewline": true,
+    "files.trimTrailingWhitespace": true
+}
+```
+
+This ensures:
+- New files created in VS Code use LF line endings
+- Files always end with a newline (required by CI checks)
+- Trailing whitespace is automatically cleaned up
+
+### Python file I/O
+
+Python scripts that write text files explicitly use `newline="\n"` to ensure LF line endings regardless of platform:
+
+```python
+# Correct: explicitly set LF line endings
+with open(output_path, "w", encoding="utf-8", newline="\n") as f:
+    f.write(content)
+
+# Correct: use newline parameter with Path.write_text()
+Path(path).write_text(content, encoding="utf-8", newline="\n")
+```
+
 ## Development workflows
 
 ### Testing

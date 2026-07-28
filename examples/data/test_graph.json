@@ -1,0 +1,15 @@
+{
+  "nodes": [
+    {"id": "A", "label": "Sensor Alpha", "color": "#0074D9"},
+    {"id": "B", "label": "Processor", "color": "#FF4136"},
+    {"id": "C", "label": "Logic Unit", "color": "#2ECC40"},
+    {"id": "D", "label": "Output Gate", "color": "#FFDC00"}
+  ],
+  "edges": [
+    {"source": "A", "target": "B"},
+    {"source": "B", "target": "C"},
+    {"source": "C", "target": "A"},
+    {"source": "C", "target": "D"},
+    {"source": "D", "target": "B"}
+  ]
+}

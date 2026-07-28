@@ -264,7 +264,7 @@ class HedTagVisualizer:
                 if fmt == "svg":
                     svg_path = save_dir / f"{output_basename}.svg"
                     svg_content = word_cloud.word_cloud_to_svg(wc)
-                    svg_path.write_text(svg_content, encoding="utf-8")
+                    svg_path.write_text(svg_content, encoding="utf-8", newline="\n")
                     result["svg_path"] = str(svg_path)
                 elif fmt in ["png", "jpg", "jpeg"]:
                     img_path = save_dir / f"{output_basename}.{fmt}"
