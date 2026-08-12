@@ -117,8 +117,9 @@ site/
 /.venv/
 config.py
 
-# VS Code
-.vscode/
+# VS Code - settings.json is committed and portable; the rest is local
+.vscode/*
+!.vscode/settings.json
 .venv/
 
 ############
@@ -133,4 +134,7 @@ Desktop.ini
 
 # Project specific
 .status/
-status/
+
+# Claude Code (machine-local)
+CLAUDE.local.md
+.claude/settings.local.json

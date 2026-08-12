@@ -365,7 +365,7 @@ pip install dist/hedvis-0.1.0-py3-none-any.whl
 
 ```powershell
 # Navigate back to the repository
-cd h:\Repos\hed-vis
+cd path\to\hed-vis
 
 # Run the test suite
 python -m unittest discover tests -v
