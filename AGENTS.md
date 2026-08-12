@@ -86,6 +86,7 @@ Dependencies and the extras `dev` and `docs` are declared in `pyproject.toml`; t
 Referred to by name, never by path.
 
 - `hed-python` - the `hedtools` package, this library's core dependency.
+- `hed-task-models` - the graph models of tasks: the model spec and the JSON models live there; this repo will hold the code that builds and reads them.
 - `hed-schemas` - the HED vocabularies; loaded through hedtools, never directly.
 - `hed-specification` - the formal annotation rules.
 - `hed-examples` - example datasets and use cases.
