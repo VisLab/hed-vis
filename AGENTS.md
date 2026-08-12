@@ -68,7 +68,7 @@ Dependencies and the extras `dev` and `docs` are declared in `pyproject.toml`; t
 - **ASCII only** in prose, comments, docstrings, and filenames: `-` not em/en dashes, `->` not arrows, `...` not an ellipsis character, straight quotes. Author names and recorded data keep whatever characters they contain.
 - **Absolute imports from `hedvis`**, never relative imports across packages.
 - **Committed files carry no project history.** No dates, no "this was changed", no phase or session labels. Rationale about how the code got here goes in `.status/decisions.md`.
-- **Nothing that ships may reference `.status/`.** It is gitignored, so such a pointer is a dead link for every reader but its author. The exception is the files whose job is to orient a tool - this file, `CLAUDE.md`, `.github/copilot-instructions.md`, `.gitignore`, and `.claude/settings.json`.
+- **Nothing that ships may reference `.status/`.** It is gitignored, so such a pointer is a dead link for every reader but its author. The exception is the files whose job is to orient a tool - this file, `CLAUDE.md`, `.gitignore`, the files under `.claude/` (`settings.json`, `rules/`), and those under `.github/` (`copilot-instructions.md`, `instructions/`).
 - **No committed file contains a local path or a drive letter.** Those go in `.status/local-environment.md`.
 - `ruff format` is the authority on Python formatting: `line-length = 120`, `E501` disabled. Root and `docs/` markdown is formatted by `mdformat --wrap no --number` and is CI-checked; files under `.github/` are not.
 - The repo is LF-only: `.gitattributes` sets `* text=auto eol=lf`, and every text-mode write passes `newline="\n"` (or `newline=""` when the content already carries `\n`) so Windows does not write CRLF.

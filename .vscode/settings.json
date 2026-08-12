@@ -1,5 +1,9 @@
 {
-    "_comment": "Committed and shared. Machine-specific settings do NOT belong here: workspace settings override user settings, so anything added here is imposed on everyone. Put your interpreter path in your VS Code User settings. launch.json and tasks.json are gitignored (local to each machine).",
+    // Committed and shared. Machine-specific settings do NOT belong here:
+    // workspace settings override user settings, so anything added here is
+    // imposed on everyone. Put your interpreter path in your VS Code User
+    // settings. launch.json and tasks.json are gitignored (local to each
+    // machine).
 
     "files.eol": "\n",
     "files.trimTrailingWhitespace": true,
