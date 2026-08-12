@@ -579,7 +579,7 @@ def save_tag_counts(tag_counts: HedTagCounts, output_file: str, logger):
             output_dict["tags"][tag_count.tag] = {"events": tag_count.events, "files": list(tag_count.files.keys())}
 
         # Write to file
-        with open(output_path, "w") as f:
+        with open(output_path, "w", encoding="utf-8", newline="\n") as f:
             json.dump(output_dict, f, indent=2)
 
         logger.info(f"Saved tag counts to: {output_file}")
