@@ -126,7 +126,6 @@ exclude = [
     ".eggs",
     "*.egg-info",
     ".status",
-    "status",
 ]
 
 [tool.ruff.lint]

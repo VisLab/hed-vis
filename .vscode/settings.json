@@ -1,0 +1,15 @@
+{
+    "_comment": "Committed and shared. Machine-specific settings do NOT belong here: workspace settings override user settings, so anything added here is imposed on everyone. Put your interpreter path in your VS Code User settings. launch.json and tasks.json are gitignored (local to each machine).",
+
+    "files.eol": "\n",
+    "files.trimTrailingWhitespace": true,
+    "files.insertFinalNewline": true,
+
+    "python.testing.unittestEnabled": true,
+    "python.testing.unittestArgs": ["-v", "-s", "./tests", "-p", "test_*.py"],
+    "python.testing.pytestEnabled": false,
+    "python.testing.cwd": "${workspaceFolder}",
+    "python.terminal.activateEnvironment": false,
+
+    "git.ignoreLimitWarning": true
+}
