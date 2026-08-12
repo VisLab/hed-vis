@@ -1,0 +1,24 @@
+{
+    "dataset_name": "sternberg",
+    "description": "Modified Sternberg working memory task, BIDS EEG.",
+    "bids_dataset": "eeg_ds004117s_hed_sternberg",
+    "identifier": "ds004117",
+    "source": {
+        "type": "local_bids",
+        "roots": [
+            "../../../../../../hed-examples/datasets/eeg_ds004117s_hed_sternberg",
+            "h:/Repos/hed-examples/datasets/eeg_ds004117s_hed_sternberg"
+        ],
+        "roots_note": "Candidate dataset roots, tried in order; the first that exists is used. Paths are relative to this file or absolute. THIS IS THE ONLY MACHINE-DEPENDENT PART OF THE MODEL PIPELINE - add a root here rather than editing a build script.",
+        "events_glob": "sub-*/ses-*/eeg/*_events.tsv",
+        "sidecar": "task-WorkingMemory_events.json"
+    },
+    "local_sample": {
+        "note": "This data/ directory holds one run plus the sidecar and README for reference only. Models are built from the full source above, not from these files. Do not compute counts from this directory.",
+        "files": [
+            "sub-001_ses-01_task-WorkingMemory_run-1_events.tsv",
+            "task-WorkingMemory_events.json",
+            "README.md"
+        ]
+    }
+}

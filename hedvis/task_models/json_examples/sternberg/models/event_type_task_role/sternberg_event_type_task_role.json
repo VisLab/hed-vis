@@ -1,0 +1,842 @@
+{
+    "name": "event_type_task_role",
+    "task": "Sternberg working memory task",
+    "description": "Modified Sternberg working-memory task. A sequence of 8 letters (3, 5, or 7 black to-be-memorized letters interspersed with green to-be-ignored letters) is followed by a 2-4 s rehearsal period cued by a dash and a single red probe letter. The participant reports by button press whether the probe was in the memorized set, receives auditory feedback, then rests until pressing either button to start the next trial. Response accuracy is a dependent measure: incorrect responses are expected and are modeled.",
+    "dataset": "sternberg",
+    "dataset_source": {
+        "spec_file": "data/dataset_source.json",
+        "bids_dataset": "eeg_ds004117s_hed_sternberg",
+        "identifier": "ds004117",
+        "resolved_root": "H:/Repos/hed-examples/datasets/eeg_ds004117s_hed_sternberg",
+        "events_glob": "sub-*/ses-*/eeg/*_events.tsv"
+    },
+    "ordering_principle": "Only phases carry ordering, taken from the prose in the dataset README (see phase_definitions[*].from_description) and confirmed against the data, not derived from it. Within a phase the nodes have no intrinsic order: they are either mutually-exclusive alternatives or repetitions, determined by whether within-phase edges occur. Node numbers are a stable naming convention only.",
+    "trial_identification": {
+        "method": "Two passes, using no trial column. Pass A maps every row to a node and segments each file into trials: a complete trial runs from a start_nodes event to the first following end_nodes event with no intervening start event. Rows left outside any complete trial are orphan candidates. Pass B rebuilds the model with those rows excluded. Iterate if excluding rows changes the segmentation.",
+        "start_nodes": [
+            "N0"
+        ],
+        "end_nodes": [
+            "N12"
+        ],
+        "n_trials_identified": 200,
+        "cross_check": "Derived trial boundaries were compared against the dataset's `trial` column, which the model does not use: 200 agree, 0 disagree."
+    },
+    "generated_from": {
+        "note": "All counts are POOLED over every file listed below and computed after excluded_rows are removed. Per-file counts are given so pooling is checkable.",
+        "n_event_files": 8,
+        "files": [
+            {
+                "file": "sub-001/ses-01/eeg/sub-001_ses-01_task-WorkingMemory_run-1_events.tsv",
+                "n_rows": 350,
+                "n_excluded": 0,
+                "n_used": 350
+            },
+            {
+                "file": "sub-001/ses-01/eeg/sub-001_ses-01_task-WorkingMemory_run-2_events.tsv",
+                "n_rows": 350,
+                "n_excluded": 0,
+                "n_used": 350
+            },
+            {
+                "file": "sub-001/ses-01/eeg/sub-001_ses-01_task-WorkingMemory_run-3_events.tsv",
+                "n_rows": 350,
+                "n_excluded": 0,
+                "n_used": 350
+            },
+            {
+                "file": "sub-001/ses-01/eeg/sub-001_ses-01_task-WorkingMemory_run-4_events.tsv",
+                "n_rows": 350,
+                "n_excluded": 0,
+                "n_used": 350
+            },
+            {
+                "file": "sub-003/ses-01/eeg/sub-003_ses-01_task-WorkingMemory_run-1_events.tsv",
+                "n_rows": 350,
+                "n_excluded": 0,
+                "n_used": 350
+            },
+            {
+                "file": "sub-003/ses-01/eeg/sub-003_ses-01_task-WorkingMemory_run-2_events.tsv",
+                "n_rows": 350,
+                "n_excluded": 0,
+                "n_used": 350
+            },
+            {
+                "file": "sub-003/ses-01/eeg/sub-003_ses-01_task-WorkingMemory_run-3_events.tsv",
+                "n_rows": 351,
+                "n_excluded": 1,
+                "n_used": 350
+            },
+            {
+                "file": "sub-003/ses-01/eeg/sub-003_ses-01_task-WorkingMemory_run-4_events.tsv",
+                "n_rows": 350,
+                "n_excluded": 0,
+                "n_used": 350
+            }
+        ],
+        "n_rows_total": 2801,
+        "n_rows_excluded": 1,
+        "n_rows_used": 2800,
+        "columns_ignored_not_in_sidecar": [
+            "value"
+        ],
+        "observed_first_row_nodes": {
+            "N0": 8
+        },
+        "observed_last_row_nodes": {
+            "N12": 8
+        },
+        "keymap_file": "sternberg_event_type_task_role_keymap.tsv"
+    },
+    "model": {
+        "model_type": "trial-stimulus-response",
+        "phases": [
+            "start_trial_phase",
+            "stimulus_phase",
+            "cue_phase",
+            "go_phase",
+            "response_phase",
+            "feedback_phase",
+            "rest_phase"
+        ],
+        "phase_definitions": {
+            "start_trial_phase": {
+                "order": 0,
+                "nodes": [
+                    "N0"
+                ],
+                "node_kind": "alternatives",
+                "node_kind_note": "No within-phase edges occur, so these nodes are mutually exclusive alternatives. Derived from the absence of within-phase edges.",
+                "from_description": {
+                    "readme_section": "[Trial initiation] / [Letter sequence presentation]",
+                    "text": "...triggering the reappearance of the fixation cross ... following a 5s presentation of a central fixation cross cue"
+                }
+            },
+            "stimulus_phase": {
+                "order": 1,
+                "nodes": [
+                    "N1",
+                    "N2"
+                ],
+                "node_kind": "repeated",
+                "node_kind_note": "Nodes recur and interleave within the phase; self-loops and edges between them are expected. Derived from the presence of within-phase edges.",
+                "from_description": {
+                    "readme_section": "[Letter sequence presentation]",
+                    "text": "a series of 8 visual letters ... presented at screen center for 1.2s followed by a 0.2s ISI. Either 3, 5, or 7 of these were colored black ... The other 5, 3, or 1 letters in the sequence were colored green and participants were to ignore these."
+                }
+            },
+            "cue_phase": {
+                "order": 2,
+                "nodes": [
+                    "N3"
+                ],
+                "node_kind": "alternatives",
+                "node_kind_note": "No within-phase edges occur, so these nodes are mutually exclusive alternatives. Derived from the absence of within-phase edges.",
+                "from_description": {
+                    "readme_section": "[Memory maintenance]",
+                    "text": "In place of a ninth letter, a dash appeared on the screen to signal the beginning of a Memory Maintenance period lasting between 2 to 4 s."
+                }
+            },
+            "go_phase": {
+                "order": 3,
+                "nodes": [
+                    "N4",
+                    "N5"
+                ],
+                "node_kind": "alternatives",
+                "node_kind_note": "No within-phase edges occur, so these nodes are mutually exclusive alternatives. Derived from the absence of within-phase edges.",
+                "from_description": {
+                    "readme_section": "[Memory probe]",
+                    "text": "A (red) probe letter then appeared, prompting the subject to respond by pressing one of two buttons"
+                }
+            },
+            "response_phase": {
+                "order": 4,
+                "nodes": [
+                    "N6",
+                    "N7",
+                    "N8",
+                    "N9"
+                ],
+                "node_kind": "alternatives",
+                "node_kind_note": "No within-phase edges occur, so these nodes are mutually exclusive alternatives. Derived from the absence of within-phase edges.",
+                "from_description": {
+                    "readme_section": "[Memory probe]",
+                    "text": "...to indicate whether or not the probe letter had been in the trial's to-be-memorized letter set."
+                }
+            },
+            "feedback_phase": {
+                "order": 5,
+                "nodes": [
+                    "N10",
+                    "N11"
+                ],
+                "node_kind": "alternatives",
+                "node_kind_note": "No within-phase edges occur, so these nodes are mutually exclusive alternatives. Derived from the absence of within-phase edges.",
+                "from_description": {
+                    "readme_section": "[Response feedback]",
+                    "text": "An auditory feedback signal (a confirmatory beep or cautionary buzz), then presented beginning at 400 ms after the button press, informed the subject whether their response was correct or incorrect."
+                }
+            },
+            "rest_phase": {
+                "order": 6,
+                "nodes": [
+                    "N12"
+                ],
+                "node_kind": "alternatives",
+                "node_kind_note": "No within-phase edges occur, so these nodes are mutually exclusive alternatives. Derived from the absence of within-phase edges.",
+                "from_description": {
+                    "readme_section": "[Trial initiation]",
+                    "text": "After a self-selected, variable delay, the subject initiated the next trial by pressing either response button"
+                }
+            }
+        },
+        "phase_edges": [
+            {
+                "source": "start_trial_phase",
+                "target": "stimulus_phase",
+                "count": 200,
+                "phase_step": "advances"
+            },
+            {
+                "source": "stimulus_phase",
+                "target": "cue_phase",
+                "count": 200,
+                "phase_step": "advances"
+            },
+            {
+                "source": "cue_phase",
+                "target": "go_phase",
+                "count": 200,
+                "phase_step": "advances"
+            },
+            {
+                "source": "go_phase",
+                "target": "response_phase",
+                "count": 200,
+                "phase_step": "advances"
+            },
+            {
+                "source": "response_phase",
+                "target": "feedback_phase",
+                "count": 200,
+                "phase_step": "advances"
+            },
+            {
+                "source": "feedback_phase",
+                "target": "rest_phase",
+                "count": 200,
+                "phase_step": "advances"
+            },
+            {
+                "source": "rest_phase",
+                "target": "start_trial_phase",
+                "count": 192,
+                "phase_step": "wraps"
+            }
+        ],
+        "columns": [
+            "event_type",
+            "task_role"
+        ],
+        "columns_source": "User-supplied, not inferred. Note that `task_role` alone yields the same 13 nodes, since every other task_role maps to a single event_type; the `*` wildcard on event_type does the work that dropping the column would do.",
+        "start_nodes": [
+            "N0"
+        ],
+        "end_nodes": [
+            "N12"
+        ],
+        "excluded_column_values": [],
+        "excluded_rows": [
+            {
+                "file": "sub-003/ses-01/eeg/sub-003_ses-01_task-WorkingMemory_run-3_events.tsv",
+                "rows": [
+                    0
+                ],
+                "row_index": "0-based over data rows, header excluded",
+                "reason": "Orphan events outside any complete trial: no start-of-trial event precedes them in the file."
+            }
+        ],
+        "nodes": {
+            "N0": {
+                "label": "Fixation",
+                "in_phase": "start_trial_phase",
+                "description": "Central fixation cross; start of the trial.",
+                "event_columns": [
+                    {
+                        "event_type": "show_cross",
+                        "task_role": "fixate"
+                    }
+                ],
+                "count": 200
+            },
+            "N1": {
+                "label": "Green",
+                "in_phase": "stimulus_phase",
+                "description": "Green letter in the encoding sequence; participant ignores it.",
+                "event_columns": [
+                    {
+                        "event_type": "show_letter",
+                        "task_role": "to_ignore"
+                    }
+                ],
+                "count": 600
+            },
+            "N2": {
+                "label": "Black",
+                "in_phase": "stimulus_phase",
+                "description": "Black letter in the encoding sequence; participant memorizes it.",
+                "event_columns": [
+                    {
+                        "event_type": "show_letter",
+                        "task_role": "to_remember"
+                    }
+                ],
+                "count": 1000
+            },
+            "N3": {
+                "label": "Memory",
+                "in_phase": "cue_phase",
+                "description": "Dash replaces the 9th letter, cueing silent rehearsal until the probe.",
+                "event_columns": [
+                    {
+                        "event_type": "show_dash",
+                        "task_role": "work_memory"
+                    }
+                ],
+                "count": 200
+            },
+            "N4": {
+                "label": "ProbeIn",
+                "in_phase": "go_phase",
+                "description": "Red probe letter that WAS in the to-be-memorized set; prompts the response.",
+                "event_columns": [
+                    {
+                        "event_type": "show_letter",
+                        "task_role": "probe_target"
+                    }
+                ],
+                "count": 108
+            },
+            "N5": {
+                "label": "ProbeOut",
+                "in_phase": "go_phase",
+                "description": "Red probe letter that was NOT in the letter sequence; prompts the response.",
+                "event_columns": [
+                    {
+                        "event_type": "show_letter",
+                        "task_role": "probe_not_shown"
+                    }
+                ],
+                "count": 92
+            },
+            "N6": {
+                "label": "ButtonInGood",
+                "in_phase": "response_phase",
+                "description": "Hit: reported the probe was a target, and it was.",
+                "event_columns": [
+                    {
+                        "event_type": "right_click",
+                        "task_role": "remembered_correct"
+                    }
+                ],
+                "count": 104
+            },
+            "N7": {
+                "label": "ButtonOutGood",
+                "in_phase": "response_phase",
+                "description": "Correct rejection: reported not-a-target, and it was not.",
+                "event_columns": [
+                    {
+                        "event_type": "left_click",
+                        "task_role": "ignored_correct"
+                    }
+                ],
+                "count": 89
+            },
+            "N8": {
+                "label": "ButtonInBad",
+                "in_phase": "response_phase",
+                "description": "Miss: reported not-a-target, but it was a target. A measured outcome, not an error in the data.",
+                "event_columns": [
+                    {
+                        "event_type": "left_click",
+                        "task_role": "ignored_incorrect"
+                    }
+                ],
+                "count": 4
+            },
+            "N9": {
+                "label": "ButtonOutBad",
+                "in_phase": "response_phase",
+                "description": "False alarm: reported a target, but the probe was not shown. A measured outcome, not an error in the data.",
+                "event_columns": [
+                    {
+                        "event_type": "right_click",
+                        "task_role": "remembered_incorrect"
+                    }
+                ],
+                "count": 3
+            },
+            "N10": {
+                "label": "FeedbackCorrect",
+                "in_phase": "feedback_phase",
+                "description": "Confirmatory beep 400 ms after a correct button press.",
+                "event_columns": [
+                    {
+                        "event_type": "sound_beep",
+                        "task_role": "feedback_correct"
+                    }
+                ],
+                "count": 193
+            },
+            "N11": {
+                "label": "FeedbackIncorrect",
+                "in_phase": "feedback_phase",
+                "description": "Cautionary buzz 400 ms after an incorrect button press.",
+                "event_columns": [
+                    {
+                        "event_type": "sound_buzz",
+                        "task_role": "feedback_incorrect"
+                    }
+                ],
+                "count": 7
+            },
+            "N12": {
+                "label": "Rest",
+                "in_phase": "rest_phase",
+                "description": "Self-paced rest; participant presses either button to indicate ready, which directly triggers the next trial's fixation cross.",
+                "event_columns": [
+                    {
+                        "event_type": "*",
+                        "task_role": "indicate_ready"
+                    }
+                ],
+                "count": 200
+            }
+        },
+        "edges": {
+            "E(0,1)": {
+                "source": "N0",
+                "target": "N1",
+                "description": "Fixation -> Green",
+                "transition": {
+                    "type": "fixed_delay",
+                    "delay_s": {
+                        "min": 5.246,
+                        "median": 5.246,
+                        "max": 5.247,
+                        "mean": 5.246,
+                        "sd": 0.0
+                    },
+                    "note": "Experimenter-controlled fixed interval."
+                },
+                "count": 84,
+                "out_probability": 0.42,
+                "phase_step": "advances",
+                "self_loop": false
+            },
+            "E(0,2)": {
+                "source": "N0",
+                "target": "N2",
+                "description": "Fixation -> Black",
+                "transition": {
+                    "type": "fixed_delay",
+                    "delay_s": {
+                        "min": 5.246,
+                        "median": 5.246,
+                        "max": 5.263,
+                        "mean": 5.247,
+                        "sd": 0.002
+                    },
+                    "note": "Experimenter-controlled fixed interval."
+                },
+                "count": 116,
+                "out_probability": 0.58,
+                "phase_step": "advances",
+                "self_loop": false
+            },
+            "E(1,1)": {
+                "source": "N1",
+                "target": "N1",
+                "description": "Green -> Green",
+                "transition": {
+                    "type": "fixed_delay",
+                    "delay_s": {
+                        "min": 1.441,
+                        "median": 1.442,
+                        "max": 1.442,
+                        "mean": 1.441,
+                        "sd": 0.0
+                    },
+                    "note": "Experimenter-controlled fixed interval."
+                },
+                "count": 202,
+                "out_probability": 0.3367,
+                "phase_step": "within_phase",
+                "self_loop": true
+            },
+            "E(1,2)": {
+                "source": "N1",
+                "target": "N2",
+                "description": "Green -> Black",
+                "transition": {
+                    "type": "fixed_delay",
+                    "delay_s": {
+                        "min": 1.441,
+                        "median": 1.442,
+                        "max": 1.458,
+                        "mean": 1.442,
+                        "sd": 0.002
+                    },
+                    "note": "Experimenter-controlled fixed interval."
+                },
+                "count": 312,
+                "out_probability": 0.52,
+                "phase_step": "within_phase",
+                "self_loop": false
+            },
+            "E(1,3)": {
+                "source": "N1",
+                "target": "N3",
+                "description": "Green -> Memory",
+                "transition": {
+                    "type": "fixed_delay",
+                    "delay_s": {
+                        "min": 1.441,
+                        "median": 1.442,
+                        "max": 1.458,
+                        "mean": 1.442,
+                        "sd": 0.002
+                    },
+                    "note": "Experimenter-controlled fixed interval."
+                },
+                "count": 86,
+                "out_probability": 0.1433,
+                "phase_step": "advances",
+                "self_loop": false
+            },
+            "E(2,1)": {
+                "source": "N2",
+                "target": "N1",
+                "description": "Black -> Green",
+                "transition": {
+                    "type": "fixed_delay",
+                    "delay_s": {
+                        "min": 1.441,
+                        "median": 1.442,
+                        "max": 1.442,
+                        "mean": 1.442,
+                        "sd": 0.0
+                    },
+                    "note": "Experimenter-controlled fixed interval."
+                },
+                "count": 314,
+                "out_probability": 0.314,
+                "phase_step": "within_phase",
+                "self_loop": false
+            },
+            "E(2,2)": {
+                "source": "N2",
+                "target": "N2",
+                "description": "Black -> Black",
+                "transition": {
+                    "type": "fixed_delay",
+                    "delay_s": {
+                        "min": 1.441,
+                        "median": 1.442,
+                        "max": 1.458,
+                        "mean": 1.442,
+                        "sd": 0.001
+                    },
+                    "note": "Experimenter-controlled fixed interval."
+                },
+                "count": 572,
+                "out_probability": 0.572,
+                "phase_step": "within_phase",
+                "self_loop": true
+            },
+            "E(2,3)": {
+                "source": "N2",
+                "target": "N3",
+                "description": "Black -> Memory",
+                "transition": {
+                    "type": "fixed_delay",
+                    "delay_s": {
+                        "min": 1.441,
+                        "median": 1.442,
+                        "max": 1.442,
+                        "mean": 1.441,
+                        "sd": 0.0
+                    },
+                    "note": "Experimenter-controlled fixed interval."
+                },
+                "count": 114,
+                "out_probability": 0.114,
+                "phase_step": "advances",
+                "self_loop": false
+            },
+            "E(3,4)": {
+                "source": "N3",
+                "target": "N4",
+                "description": "Memory -> ProbeIn",
+                "transition": {
+                    "type": "jittered_delay",
+                    "delay_s": {
+                        "min": 2.246,
+                        "median": 3.286,
+                        "max": 4.19,
+                        "mean": 3.21,
+                        "sd": 0.527
+                    },
+                    "note": "Maintenance period is randomly drawn from a 2-4 s range."
+                },
+                "count": 108,
+                "out_probability": 0.54,
+                "phase_step": "advances",
+                "self_loop": false
+            },
+            "E(3,5)": {
+                "source": "N3",
+                "target": "N5",
+                "description": "Memory -> ProbeOut",
+                "transition": {
+                    "type": "jittered_delay",
+                    "delay_s": {
+                        "min": 2.246,
+                        "median": 2.984,
+                        "max": 4.207,
+                        "mean": 3.059,
+                        "sd": 0.614
+                    },
+                    "note": "Maintenance period is randomly drawn from a 2-4 s range."
+                },
+                "count": 92,
+                "out_probability": 0.46,
+                "phase_step": "advances",
+                "self_loop": false
+            },
+            "E(4,6)": {
+                "source": "N4",
+                "target": "N6",
+                "description": "ProbeIn -> ButtonInGood",
+                "transition": {
+                    "type": "response_latency",
+                    "delay_s": {
+                        "min": 0.543,
+                        "median": 0.984,
+                        "max": 2.148,
+                        "mean": 1.054,
+                        "sd": 0.339
+                    },
+                    "note": "Delay is the participant's reaction time, not a task parameter."
+                },
+                "count": 104,
+                "out_probability": 0.963,
+                "phase_step": "advances",
+                "self_loop": false
+            },
+            "E(4,8)": {
+                "source": "N4",
+                "target": "N8",
+                "description": "ProbeIn -> ButtonInBad",
+                "transition": {
+                    "type": "response_latency",
+                    "delay_s": {
+                        "min": 0.608,
+                        "median": 0.963,
+                        "max": 1.34,
+                        "mean": 0.969,
+                        "sd": 0.28
+                    },
+                    "note": "Delay is the participant's reaction time, not a task parameter."
+                },
+                "count": 4,
+                "out_probability": 0.037,
+                "phase_step": "advances",
+                "self_loop": false
+            },
+            "E(5,7)": {
+                "source": "N5",
+                "target": "N7",
+                "description": "ProbeOut -> ButtonOutGood",
+                "transition": {
+                    "type": "response_latency",
+                    "delay_s": {
+                        "min": 0.606,
+                        "median": 1.158,
+                        "max": 7.228,
+                        "mean": 1.403,
+                        "sd": 0.901
+                    },
+                    "note": "Delay is the participant's reaction time, not a task parameter."
+                },
+                "count": 89,
+                "out_probability": 0.9674,
+                "phase_step": "advances",
+                "self_loop": false
+            },
+            "E(5,9)": {
+                "source": "N5",
+                "target": "N9",
+                "description": "ProbeOut -> ButtonOutBad",
+                "transition": {
+                    "type": "response_latency",
+                    "delay_s": {
+                        "min": 0.634,
+                        "median": 1.165,
+                        "max": 1.209,
+                        "mean": 1.003,
+                        "sd": 0.261
+                    },
+                    "note": "Delay is the participant's reaction time, not a task parameter."
+                },
+                "count": 3,
+                "out_probability": 0.0326,
+                "phase_step": "advances",
+                "self_loop": false
+            },
+            "E(6,10)": {
+                "source": "N6",
+                "target": "N10",
+                "description": "ButtonInGood -> FeedbackCorrect",
+                "transition": {
+                    "type": "fixed_delay",
+                    "delay_s": {
+                        "min": 0.4,
+                        "median": 0.4,
+                        "max": 0.4,
+                        "mean": 0.4,
+                        "sd": 0.0
+                    },
+                    "note": "Auditory feedback is delivered a fixed 400 ms after the press."
+                },
+                "count": 104,
+                "out_probability": 1.0,
+                "phase_step": "advances",
+                "self_loop": false
+            },
+            "E(7,10)": {
+                "source": "N7",
+                "target": "N10",
+                "description": "ButtonOutGood -> FeedbackCorrect",
+                "transition": {
+                    "type": "fixed_delay",
+                    "delay_s": {
+                        "min": 0.4,
+                        "median": 0.4,
+                        "max": 0.408,
+                        "mean": 0.4,
+                        "sd": 0.001
+                    },
+                    "note": "Auditory feedback is delivered a fixed 400 ms after the press."
+                },
+                "count": 89,
+                "out_probability": 1.0,
+                "phase_step": "advances",
+                "self_loop": false
+            },
+            "E(8,11)": {
+                "source": "N8",
+                "target": "N11",
+                "description": "ButtonInBad -> FeedbackIncorrect",
+                "transition": {
+                    "type": "fixed_delay",
+                    "delay_s": {
+                        "min": 0.4,
+                        "median": 0.4,
+                        "max": 0.4,
+                        "mean": 0.4,
+                        "sd": 0.0
+                    },
+                    "note": "Auditory feedback is delivered a fixed 400 ms after the press."
+                },
+                "count": 4,
+                "out_probability": 1.0,
+                "phase_step": "advances",
+                "self_loop": false
+            },
+            "E(9,11)": {
+                "source": "N9",
+                "target": "N11",
+                "description": "ButtonOutBad -> FeedbackIncorrect",
+                "transition": {
+                    "type": "fixed_delay",
+                    "delay_s": {
+                        "min": 0.4,
+                        "median": 0.4,
+                        "max": 0.4,
+                        "mean": 0.4,
+                        "sd": 0.0
+                    },
+                    "note": "Auditory feedback is delivered a fixed 400 ms after the press."
+                },
+                "count": 3,
+                "out_probability": 1.0,
+                "phase_step": "advances",
+                "self_loop": false
+            },
+            "E(10,12)": {
+                "source": "N10",
+                "target": "N12",
+                "description": "FeedbackCorrect -> Rest",
+                "transition": {
+                    "type": "self_paced",
+                    "delay_s": {
+                        "min": 0.364,
+                        "median": 2.447,
+                        "max": 15.684,
+                        "mean": 3.755,
+                        "sd": 3.13
+                    },
+                    "note": "Participant chooses when to indicate ready."
+                },
+                "count": 193,
+                "out_probability": 1.0,
+                "phase_step": "advances",
+                "self_loop": false
+            },
+            "E(11,12)": {
+                "source": "N11",
+                "target": "N12",
+                "description": "FeedbackIncorrect -> Rest",
+                "transition": {
+                    "type": "self_paced",
+                    "delay_s": {
+                        "min": 1.841,
+                        "median": 3.66,
+                        "max": 8.09,
+                        "mean": 4.116,
+                        "sd": 1.889
+                    },
+                    "note": "Participant chooses when to indicate ready."
+                },
+                "count": 7,
+                "out_probability": 1.0,
+                "phase_step": "advances",
+                "self_loop": false
+            },
+            "E(12,0)": {
+                "source": "N12",
+                "target": "N0",
+                "description": "Rest -> Fixation",
+                "transition": {
+                    "type": "triggered",
+                    "delay_s": {
+                        "min": 0.017,
+                        "median": 0.026,
+                        "max": 0.035,
+                        "mean": 0.026,
+                        "sd": 0.005
+                    },
+                    "note": "The ready press itself triggers the next trial's fixation cross."
+                },
+                "count": 192,
+                "out_probability": 1.0,
+                "phase_step": "wraps",
+                "self_loop": false
+            }
+        }
+    }
+}

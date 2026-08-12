@@ -1,0 +1,204 @@
+{
+    "task": "Sternberg working memory task",
+    "description": "A cognitive task designed to assess working memory capacity and processing speed.",
+    "model": {
+        "model_type": "trial-based",
+        "blocks": ["start_trial_block", "stimulus_block", "response_block", "feedback_block", "rest_block", "end_trial_block"],
+        "nodes": {
+            "N0": {
+                "label": "Fixation",
+                "in_block": "start_trial_block",
+                "event_columns": [
+                    {
+                        "event_type": "show_cross",
+                        "task_role": "fixate"
+                    }
+                ]
+            },
+            "N1": {
+                "label": "Green",
+                "in_block": "stimulus_block",
+                "event_columns": [
+                    {
+                        "event_type": "show_letter",
+                        "task_role": "to_ignore"
+                    }
+                ]
+            },
+            "N2": {
+                "label": "Black",
+                "in_block": "stimulus_block",
+                "event_columns": [
+                    {
+                        "event_type": "show_letter",
+                        "task_role": "to_remember"
+                    }
+                ]
+            },
+            "N3": {
+                "label": "Memory",
+                "in_block": "stimulus_block",
+                "event_columns": [
+                    {
+                        "event_type": "show_dash",
+                        "task_role": "work_memory"
+                    }
+                ]
+            },
+            "N4": {
+                "label": "ProbeIn",
+                "in_block": "stimulus_block",
+                "event_columns": [
+                    {
+                        "event_type": "show_letter",
+                        "task_role": "probe_target"
+                    }
+                ]
+            },
+            "N5": {
+                "label": "ProbeOut",
+                "in_block": "stimulus_block",
+                "event_columns": [
+                    {
+                        "event_type": "show_letter",
+                        "task_role": "probe_not_shown"
+                    }
+                ]
+            },
+            "N6": {
+                "label": "ButtonInGood",
+                "in_block": "response_block",
+                "event_columns": [
+                    {
+                        "event_type": "right_click",
+                        "task_role": "remembered_correct"
+                    }
+                ]
+            },
+            "N7": {
+                "label": "ButtonInBad",
+                "in_block": "response_block",
+                "event_columns": [
+                    {
+                        "event_type": "left_click",
+                        "task_role": "ignored_incorrect"
+                    }
+                ]
+            },
+            "N8": {
+                "label": "ButtonOutGood",
+                "in_block": "response_block",
+                "event_columns": [
+                    {
+                        "event_type": "left_click",
+                        "task_role": "ignored_correct"
+                    }
+                ]
+            },
+            "N9": {
+                "label": "ButtonOutBad",
+                "in_block": "response_block",
+                "event_columns": [
+                    {
+                        "event_type": "right_click",
+                        "task_role": "remembered_incorrect"
+                    }
+                ]
+            },
+            "N10": {
+                "label": "FeedbackCorrect",
+                "in_block": "feedback_block",
+                "event_columns": [
+                    {
+                        "event_type": "sound_beep",
+                        "task_role": "feedback_correct"
+                    }
+                ]
+            },
+            "N11": {
+                "label": "FeedbackIncorrect",
+                "in_block": "feedback_block",
+                "event_columns": [
+                    {
+                        "event_type": "sound_buzz",
+                        "task_role": "feedback_incorrect"
+                    }
+                ]
+            },
+            "N12": {
+                "label": "Rest",
+                "in_block": "rest_block",
+                "event_columns": []
+            },
+            "N13": {
+                "label": "EndTrialButton",
+                "in_block": "end_trial_block",
+                "event_columns": [
+                    {
+                        "event_type": "right_click",
+                        "task_role": "indicate_ready"
+                    },
+                    {
+                        "event_type": "left_click",
+                        "task_role": "indicate_ready"
+                    }
+                ]
+            }
+        },
+        "edges": [
+            {
+                "source": "N0",
+                "target": "N1",
+                "description": "Presentation of the first letter (an ignore letter) in the memory set.",
+                "tranisition": {
+                    "type": "fixed_time"
+                }
+            }
+            {
+                "source": "N0",
+                "target": "N2"
+            },
+            {
+                "source": "N1",
+                "target": "N3"
+            },
+            {
+                "source": "N2",
+                "target": "N3"
+            },
+            {
+                "source": "N3",
+                "target": "N4"
+            },
+            {
+                "source": "N3",
+                "target": "N5"
+            },
+            {
+                "source": "N4",
+                "target": "N6"
+            },
+            {
+                "source": "N4",
+                "target": "N7"
+            },
+            {
+                "source": "N5",
+                "target": "N8"
+            },
+            {
+                "source": "N5",
+                "target": "N9"
+            },
+            {
+                "source": ["N6", N8"],
+                "target": ["N10", N11"]
+            }
+        ]
+
+
+
+
+    }
+
+}

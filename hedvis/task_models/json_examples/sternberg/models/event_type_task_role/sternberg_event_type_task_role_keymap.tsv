@@ -1,0 +1,15 @@
+node	label	in_phase	event_type	task_role	key_counts
+N0	Fixation	start_trial_phase	show_cross	fixate	200
+N1	Green	stimulus_phase	show_letter	to_ignore	600
+N2	Black	stimulus_phase	show_letter	to_remember	1000
+N3	Memory	cue_phase	show_dash	work_memory	200
+N4	ProbeIn	go_phase	show_letter	probe_target	108
+N5	ProbeOut	go_phase	show_letter	probe_not_shown	92
+N6	ButtonInGood	response_phase	right_click	remembered_correct	104
+N7	ButtonOutGood	response_phase	left_click	ignored_correct	89
+N8	ButtonInBad	response_phase	left_click	ignored_incorrect	4
+N9	ButtonOutBad	response_phase	right_click	remembered_incorrect	3
+N10	FeedbackCorrect	feedback_phase	sound_beep	feedback_correct	193
+N11	FeedbackIncorrect	feedback_phase	sound_buzz	feedback_incorrect	7
+N12	Rest	rest_phase	right_click	indicate_ready	150
+N12	Rest	rest_phase	left_click	indicate_ready	50

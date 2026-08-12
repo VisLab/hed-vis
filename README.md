@@ -96,12 +96,7 @@ If you need to install dependencies for development or documentation:
 from hedvis import create_wordcloud
 
 # Create word cloud from frequency dictionary
-word_freq = {
-    "Event": 15,
-    "Action": 10,
-    "Sensory-event": 8,
-    "Visual-presentation": 7
-}
+word_freq = {"Event": 15, "Action": 10, "Sensory-event": 8, "Visual-presentation": 7}
 
 wc = create_wordcloud(word_freq, width=800, height=600)
 wc.to_file("wordcloud.png")
@@ -113,17 +108,9 @@ wc.to_file("wordcloud.png")
 from hedvis import HedTagVisualizer, WordCloudConfig, VisualizationConfig
 
 # Configure visualization
-wc_config = WordCloudConfig(
-    width=1200,
-    height=800,
-    background_color="white",
-    colormap="viridis"
-)
+wc_config = WordCloudConfig(width=1200, height=800, background_color="white", colormap="viridis")
 
-viz_config = VisualizationConfig(
-    word_cloud=wc_config,
-    output_formats=["png", "svg"]
-)
+viz_config = VisualizationConfig(word_cloud=wc_config, output_formats=["png", "svg"])
 
 # Create visualizer
 visualizer = HedTagVisualizer(viz_config)
@@ -147,14 +134,10 @@ tabular = TabularInput("events.tsv", sidecar="events.json")
 visualizer = HedTagVisualizer()
 
 # Generate visualizations
-results = visualizer.visualize_from_tabular(
-    tabular,
-    schema,
-    output_basename="experiment_tags"
-)
+results = visualizer.visualize_from_tabular(tabular, schema, output_basename="experiment_tags")
 
 # Save word cloud
-results['word_cloud']['wordcloud_object'].to_file("tags.png")
+results["word_cloud"]["wordcloud_object"].to_file("tags.png")
 ```
 
 All dependencies are managed in `pyproject.toml` and installed automatically with `pip install hedvis`.
