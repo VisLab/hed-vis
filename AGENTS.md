@@ -26,16 +26,16 @@ Test framework: unittest. Never convert the suite from one style to the other as
 
 Run from the repo root. `python` must be an interpreter with this package installed (`pip install -e ".[dev]"`).
 
-| Task                  | Command                                                                               |
-| --------------------- | ------------------------------------------------------------------------------------- |
-| Tests (the gate)      | `python -m unittest discover tests -v`                                                |
-| One test file         | `python -m unittest tests.test_tag_word_cloud -v`                                     |
-| One test              | `python -m unittest tests.test_tag_word_cloud.TestTagWordCloud.test_create_wordcloud` |
-| Lint                  | `ruff check .`                                                                        |
-| Format check          | `ruff format --check .`                                                               |
-| Spell check           | `typos`                                                                               |
-| Markdown format check | `mdformat --check --wrap no --number *.md` and the same for `docs/*.md`               |
-| Docs build            | `sphinx-build -b html . _build/html` run from `docs/` (needs the `docs` extra)        |
+| Task                  | Command                                                                                                                           |
+| --------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
+| Tests (the gate)      | `python -m unittest discover tests -v`                                                                                            |
+| One test file         | `python -m unittest tests.test_tag_word_cloud -v`                                                                                 |
+| One test              | `python -m unittest tests.test_tag_word_cloud.TestTagWordCloud.test_create_wordcloud`                                             |
+| Lint                  | `ruff check .`                                                                                                                    |
+| Format check          | `ruff format --check .`                                                                                                           |
+| Spell check           | `typos`                                                                                                                           |
+| Markdown format check | `mdformat --check --wrap no --number *.md .github/*.md .github/instructions/*.md .claude/rules/*.md` and the same for `docs/*.md` |
+| Docs build            | `sphinx-build -b html . _build/html` run from `docs/` (needs the `docs` extra)                                                    |
 
 CI (`.github/workflows/`) runs the tests on Ubuntu across Python 3.10-3.14 on `main` (3.10 and 3.13 on feature branches), on Windows for 3.10-3.12 (`main` and PRs to `main` only), plus coverage, ruff, typos, mdformat, a lychee link check (`lychee.toml`), and the docs build, which deploys to GitHub Pages on push to `main`. If the commands above pass locally, CI passes.
 
@@ -70,7 +70,7 @@ Dependencies and the extras `dev` and `docs` are declared in `pyproject.toml`; t
 - **Committed files carry no project history.** No dates, no "this was changed", no phase or session labels. Rationale about how the code got here goes in `.status/decisions.md`.
 - **Nothing that ships may reference `.status/`.** It is gitignored, so such a pointer is a dead link for every reader but its author. The exception is the files whose job is to orient a tool - this file, `CLAUDE.md`, `.gitignore`, the files under `.claude/` (`settings.json`, `rules/`), and those under `.github/` (`copilot-instructions.md`, `instructions/`).
 - **No committed file contains a local path or a drive letter.** Those go in `.status/local-environment.md`.
-- `ruff format` is the authority on Python formatting: `line-length = 120`, `E501` disabled. Root and `docs/` markdown is formatted by `mdformat --wrap no --number` and is CI-checked; files under `.github/` are not.
+- `ruff format` is the authority on Python formatting: `line-length = 120`, `E501` disabled. Root and `docs/` markdown, plus the markdown under `.github/` and `.claude/rules/`, is formatted by `mdformat --wrap no --number` and is CI-checked. The two `status_conduct` files carry frontmatter, so local runs need `mdformat-front-matters` installed, as CI has.
 - The repo is LF-only: `.gitattributes` sets `* text=auto eol=lf`, and every text-mode write passes `newline="\n"` (or `newline=""` when the content already carries `\n`) so Windows does not write CRLF.
 
 ## Rules that are easy to get wrong
