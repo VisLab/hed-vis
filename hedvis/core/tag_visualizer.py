@@ -1,15 +1,17 @@
 """Main API for generating HED tag visualizations."""
 
-from typing import Dict, Optional, Union, List, Any
 from pathlib import Path
-from PIL import Image
+from typing import Any
+
 from hed import HedSchema
 from hed.models import TabularInput
-from hed.tools.analysis.hed_tag_counts import HedTagCounts
 from hed.tools.analysis.event_manager import EventManager
+from hed.tools.analysis.hed_tag_counts import HedTagCounts
 from hed.tools.analysis.hed_tag_manager import HedTagManager
-from hedvis.generators import word_cloud
+from PIL import Image
+
 from hedvis.core.visualization_config import VisualizationConfig
+from hedvis.generators import word_cloud
 
 
 class HedTagVisualizer:
@@ -20,7 +22,7 @@ class HedTagVisualizer:
     hedtools data structures.
     """
 
-    def __init__(self, config: Union[VisualizationConfig, Dict, None] = None):
+    def __init__(self, config: VisualizationConfig | dict | None = None):
         """Initialize visualizer with configuration.
 
         Parameters:
@@ -37,9 +39,9 @@ class HedTagVisualizer:
     def visualize_from_counts(
         self,
         tag_counts: HedTagCounts,
-        tag_template: Optional[Dict[str, List[str]]] = None,
+        tag_template: dict[str, list[str]] | None = None,
         output_basename: str = "hed_tags",
-    ) -> Dict[str, Any]:
+    ) -> dict[str, Any]:
         """Generate visualizations from pre-computed tag counts.
 
         Parameters:
@@ -67,12 +69,12 @@ class HedTagVisualizer:
         self,
         tabular_input: TabularInput,
         schema: HedSchema,
-        tag_template: Optional[Dict[str, List[str]]] = None,
+        tag_template: dict[str, list[str]] | None = None,
         output_basename: str = "hed_tags",
         include_context: bool = True,
         replace_defs: bool = True,
-        remove_types: Optional[List[str]] = None,
-    ) -> Dict[str, Any]:
+        remove_types: list[str] | None = None,
+    ) -> dict[str, Any]:
         """Generate visualizations directly from tabular data.
 
         Parameters:
@@ -102,15 +104,15 @@ class HedTagVisualizer:
     def visualize_from_dataframe(
         self,
         df,
-        schema: Union[HedSchema, str],
+        schema: HedSchema | str,
         sidecar=None,
         name: str = "dataset",
-        tag_template: Optional[Dict[str, List[str]]] = None,
+        tag_template: dict[str, list[str]] | None = None,
         output_basename: str = "hed_tags",
         include_context: bool = True,
         replace_defs: bool = True,
-        remove_types: Optional[List[str]] = None,
-    ) -> Dict[str, Any]:
+        remove_types: list[str] | None = None,
+    ) -> dict[str, Any]:
         """Generate visualizations from a pandas DataFrame.
 
         Parameters:
@@ -153,7 +155,7 @@ class HedTagVisualizer:
         schema: HedSchema,
         include_context: bool = True,
         replace_defs: bool = True,
-        remove_types: Optional[List[str]] = None,
+        remove_types: list[str] | None = None,
     ) -> HedTagCounts:
         """Compute tag counts from tabular input.
 
@@ -179,8 +181,8 @@ class HedTagVisualizer:
         return tag_counts
 
     def _extract_word_frequencies(
-        self, tag_counts: HedTagCounts, tag_template: Optional[Dict[str, List[str]]] = None
-    ) -> Dict[str, int]:
+        self, tag_counts: HedTagCounts, tag_template: dict[str, list[str]] | None = None
+    ) -> dict[str, int]:
         """Extract word frequencies from tag counts.
 
         Parameters:
@@ -211,7 +213,7 @@ class HedTagVisualizer:
 
         return word_freq
 
-    def _generate_word_cloud(self, word_freq: Dict[str, int], output_basename: str) -> Dict[str, Any]:
+    def _generate_word_cloud(self, word_freq: dict[str, int], output_basename: str) -> dict[str, Any]:
         """Generate word cloud visualization.
 
         Parameters:

@@ -1,7 +1,7 @@
 """Configuration classes for HED visualizations."""
 
 from dataclasses import dataclass, field
-from typing import Optional, Dict, Any, List
+from typing import Any
 
 
 @dataclass
@@ -32,13 +32,13 @@ class WordCloudConfig:
     height: int = 600
 
     # Appearance
-    background_color: Optional[str] = None  # None = transparent
+    background_color: str | None = None  # None = transparent
     prefer_horizontal: float = 0.75
     min_font_size: int = 8
-    max_font_size: Optional[int] = None  # Auto-calculated if None
+    max_font_size: int | None = None  # Auto-calculated if None
 
     # Font settings
-    font_path: Optional[str] = None
+    font_path: str | None = None
 
     # Color scheme
     colormap: str = "nipy_spectral"
@@ -47,7 +47,7 @@ class WordCloudConfig:
 
     # Mask settings
     use_mask: bool = False
-    mask_path: Optional[str] = None
+    mask_path: str | None = None
     contour_width: float = 3.0
     contour_color: str = "black"
 
@@ -56,7 +56,7 @@ class WordCloudConfig:
     relative_scaling: float = 1.0
 
     @classmethod
-    def from_dict(cls, config_dict: Dict[str, Any]) -> "WordCloudConfig":
+    def from_dict(cls, config_dict: dict[str, Any]) -> "WordCloudConfig":
         """Create configuration from dictionary.
 
         Parameters:
@@ -69,7 +69,7 @@ class WordCloudConfig:
         valid_fields = {k: v for k, v in config_dict.items() if k in cls.__dataclass_fields__}
         return cls(**valid_fields)
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Convert configuration to dictionary.
 
         Returns:
@@ -89,11 +89,11 @@ class VisualizationConfig:
     """
 
     # Output settings
-    output_formats: List[str] = field(default_factory=lambda: ["svg"])
-    save_directory: Optional[str] = None
+    output_formats: list[str] = field(default_factory=lambda: ["svg"])
+    save_directory: str | None = None
 
     # Visualization types to generate
-    word_cloud: Optional[WordCloudConfig] = None
+    word_cloud: WordCloudConfig | None = None
 
     # Future visualization types can be added here:
     # timeline: Optional[TimelineConfig] = None
@@ -101,7 +101,7 @@ class VisualizationConfig:
     # heatmap: Optional[HeatmapConfig] = None
 
     @classmethod
-    def from_dict(cls, config_dict: Dict[str, Any]) -> "VisualizationConfig":
+    def from_dict(cls, config_dict: dict[str, Any]) -> "VisualizationConfig":
         """Create configuration from dictionary.
 
         Parameters:
@@ -123,7 +123,7 @@ class VisualizationConfig:
         valid_fields = {k: v for k, v in config.items() if k in cls.__dataclass_fields__}
         return cls(**valid_fields)
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Convert configuration to dictionary.
 
         Returns:

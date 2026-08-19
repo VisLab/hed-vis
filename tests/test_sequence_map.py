@@ -1,5 +1,6 @@
-import unittest
 import os
+import unittest
+
 from hedvis.core.sequence_map import SequenceMap
 
 
