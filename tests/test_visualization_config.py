@@ -1,7 +1,8 @@
 """Tests for visualization configuration classes."""
 
 import unittest
-from hedvis.core.visualization_config import WordCloudConfig, VisualizationConfig
+
+from hedvis.core.visualization_config import VisualizationConfig, WordCloudConfig
 
 
 class TestWordCloudConfig(unittest.TestCase):

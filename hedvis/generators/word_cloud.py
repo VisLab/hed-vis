@@ -1,10 +1,11 @@
 """Utilities for creating a word cloud."""
 
 import numpy as np
-from PIL import Image
 from hed.errors.exceptions import HedFileError
-from hedvis.generators import word_cloud_util
+from PIL import Image
 from wordcloud import WordCloud
+
+from hedvis.generators import word_cloud_util
 
 MIN_WORD_CLOUD_SIZE = 100
 

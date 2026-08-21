@@ -1,12 +1,13 @@
+import os
 import unittest
+
+import matplotlib.font_manager as fm
+import numpy as np
 import wordcloud
+from PIL import Image, ImageDraw
+
 from hedvis.generators import word_cloud as tag_word_cloud
 from hedvis.generators.word_cloud import load_and_resize_mask
-import matplotlib.font_manager as fm
-
-import numpy as np
-from PIL import Image, ImageDraw
-import os
 
 
 class TestWordCloudFunctions(unittest.TestCase):

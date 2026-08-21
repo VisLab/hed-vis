@@ -40,19 +40,18 @@ Examples:
 """
 
 import argparse
-import sys
-import logging
 import json
+import logging
+import sys
 from pathlib import Path
-from typing import Dict, List, Optional
 
 from hed import _version as vr
-from hed.schema import load_schema_version
 from hed.models import TabularInput
-from hed.tools.util.io_util import get_file_list
-from hed.tools.analysis.hed_tag_counts import HedTagCounts
+from hed.schema import load_schema_version
 from hed.tools.analysis.event_manager import EventManager
+from hed.tools.analysis.hed_tag_counts import HedTagCounts
 from hed.tools.analysis.hed_tag_manager import HedTagManager
+from hed.tools.util.io_util import get_file_list
 
 from hedvis.core.tag_visualizer import HedTagVisualizer
 from hedvis.core.visualization_config import VisualizationConfig, WordCloudConfig
@@ -295,7 +294,7 @@ def setup_logging(args):
     return logger
 
 
-def find_sidecar(tsv_path: Path, sidecar_pattern: Optional[str] = None) -> Optional[Path]:
+def find_sidecar(tsv_path: Path, sidecar_pattern: str | None = None) -> Path | None:
     """Find JSON sidecar file for a TSV file.
 
     Parameters:
@@ -338,7 +337,7 @@ def find_sidecar(tsv_path: Path, sidecar_pattern: Optional[str] = None) -> Optio
     return None
 
 
-def load_tag_template(template_path: str) -> Optional[Dict[str, List[str]]]:
+def load_tag_template(template_path: str) -> dict[str, list[str]] | None:
     """Load tag template from JSON file.
 
     Parameters:
@@ -348,7 +347,7 @@ def load_tag_template(template_path: str) -> Optional[Dict[str, List[str]]]:
         Dictionary with tag template or None if loading fails.
     """
     try:
-        with open(template_path, "r") as f:
+        with open(template_path) as f:
             template = json.load(f)
         return template
     except Exception as e:
@@ -356,7 +355,7 @@ def load_tag_template(template_path: str) -> Optional[Dict[str, List[str]]]:
         return None
 
 
-def merge_tag_counts(all_counts: List[HedTagCounts]) -> HedTagCounts:
+def merge_tag_counts(all_counts: list[HedTagCounts]) -> HedTagCounts:
     """Merge multiple HedTagCounts into a single combined count.
 
     Parameters:

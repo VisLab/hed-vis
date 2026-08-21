@@ -1,6 +1,6 @@
 """Quick example demonstrating the new hedvis API."""
 
-from hedvis import HedTagVisualizer, WordCloudConfig, VisualizationConfig, create_wordcloud, word_cloud_to_svg
+from hedvis import HedTagVisualizer, VisualizationConfig, WordCloudConfig, create_wordcloud, word_cloud_to_svg
 
 # Example 1: Simple dictionary configuration
 print("Example 1: Simple dictionary configuration")

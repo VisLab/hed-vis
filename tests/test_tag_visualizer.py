@@ -1,14 +1,16 @@
 """Tests for HedTagVisualizer."""
 
-import unittest
-import tempfile
-import shutil
 import os
+import shutil
+import tempfile
+import unittest
 from pathlib import Path
-from hedvis import HedTagVisualizer, VisualizationConfig, WordCloudConfig
-from hed.tools.analysis.hed_tag_counts import HedTagCounts
-from hed.models import HedString, TabularInput, Sidecar
+
+from hed.models import HedString, Sidecar, TabularInput
 from hed.schema import load_schema_version
+from hed.tools.analysis.hed_tag_counts import HedTagCounts
+
+from hedvis import HedTagVisualizer, VisualizationConfig, WordCloudConfig
 
 
 class TestHedTagVisualizerInit(unittest.TestCase):

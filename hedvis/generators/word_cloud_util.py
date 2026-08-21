@@ -3,10 +3,10 @@
 import random
 from random import Random
 
-import numpy as np
-from PIL import Image, ImageFilter
 import matplotlib as mp1
+import numpy as np
 import wordcloud as wcloud
+from PIL import Image, ImageFilter
 
 
 def generate_contour_svg(wc, width, height):

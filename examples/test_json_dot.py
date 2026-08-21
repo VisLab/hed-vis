@@ -1,10 +1,11 @@
 import json
+
 import networkx as nx
 from pyvis.network import Network
 
 # 1. Load the JSON data
 file_path = "./data/test_graph.json"
-with open(file_path, "r") as f:
+with open(file_path) as f:
     data = json.load(f)
 
 # 2. Initialize a Directed Graph in NetworkX
