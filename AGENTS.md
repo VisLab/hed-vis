@@ -81,6 +81,10 @@ Dependencies and the extras `dev` and `docs` are declared in `pyproject.toml`; t
 - Validate word-frequency dictionaries, font paths, and mask paths before use; keep dimensions user-configurable rather than hardcoded.
 - `typos` is configured in `pyproject.toml` with domain-specific exceptions (`hed`, `parms`, ...). Add to `[tool.typos.default.extend-words]` rather than "fixing" a false positive in code.
 
+## Git flow
+
+Hosted at hed-standard; `origin` is the VisLab fork and `upstream` is hed-standard. Local `main` is a clean mirror of `upstream/main` - never commit or merge to it locally. All work goes on a branch based on `upstream/main`, pushed to the fork, and merged via a PR to hed-standard.
+
 ## Related repositories
 
 Referred to by name, never by path.
